@@ -1,130 +1,14 @@
-# Exchange WBR — CPU Report Configuration
+# Exchange WBR — Global Configuration
 #
-# Input files: drop xlsx files into input/ using the naming convention:
-#   CPU_<device-tag>_<timeframe>.xlsx  (case-insensitive)
-#
-#   Device tags:  mob, tv, ac, ref, wm
-#   Timeframes:   weekly, monthly, quarterly, pytd
+# Lists which metrics to process when run.py is executed.
+# Each metric has its own:
+#   - transform_<metric>.py   (transformation logic)
+#   - configs/<metric>.yaml   (metric-specific config)
+#   - input/<metric>/         (input xlsx files)
+#   - output/<metric>/        (generated reports)
 
-devices:
-
-  mobile:
-    title: "CPU (Mobiles)"
-    segments: [overall, generalist, specialist]
-    timeframes: [weekly, monthly, quarterly, pytd]
-    reasons:
-      overall:
-        pre_pdd:
-          - "check order status tracking"
-          - "request for early delivery"
-          - "reschedule delivery"
-        pdd:
-          - "check order status tracking"
-          - "invalid scan   delivery attempted  customer reject"
-          - "request for early delivery"
-        post_pdd:
-          - "check order status tracking"
-          - "check refund status"
-          - "late shipment"
-      generalist:
-        pre_pdd:
-          - "check order status tracking"
-          - "request for early delivery"
-          - "check refund status"
-        pdd:
-          - "check order status tracking"
-          - "invalid scan   delivery attempted  customer reject"
-          - "request for early delivery"
-        post_pdd:
-          - "check order status tracking"
-          - "invalid scan   delivery attempted  customer reject"
-          - "late shipment"
-      specialist:
-        pre_pdd:
-          - "check order status tracking"
-          - "request for early delivery"
-          - "reschedule delivery"
-        pdd:
-          - "check order status tracking"
-          - "request for early delivery"
-          - "reschedule delivery"
-        post_pdd:
-          - "check order status tracking"
-          - "late shipment"
-          - "check refund status"
-
-  tv:
-    title: "CPU (TV)"
-    segments: [overall]
-    timeframes: [weekly, monthly, quarterly, pytd]
-    reasons:
-      overall:
-        pre_pdd:
-          - "check order status tracking"
-          - "request for early delivery"
-          - "reschedule delivery"
-        pdd:
-          - "check order status tracking"
-          - "invalid scan   delivery attempted  customer reject"
-          - "request for early delivery"
-        post_pdd:
-          - "check order status tracking"
-          - "check refund status"
-          - "late shipment"
-
-  ac:
-    title: "CPU (AC)"
-    segments: [overall]
-    timeframes: [weekly, monthly, quarterly, pytd]
-    reasons:
-      overall:
-        pre_pdd:
-          - "check order status tracking"
-          - "request for early delivery"
-          - "reschedule delivery"
-        pdd:
-          - "check order status tracking"
-          - "invalid scan   delivery attempted  customer reject"
-          - "request for early delivery"
-        post_pdd:
-          - "check order status tracking"
-          - "check refund status"
-          - "late shipment"
-
-  refrigerator:
-    title: "CPU (Refrigerator)"
-    segments: [overall]
-    timeframes: [weekly, monthly, quarterly, pytd]
-    reasons:
-      overall:
-        pre_pdd:
-          - "check order status tracking"
-          - "request for early delivery"
-          - "reschedule delivery"
-        pdd:
-          - "check order status tracking"
-          - "invalid scan   delivery attempted  customer reject"
-          - "request for early delivery"
-        post_pdd:
-          - "check order status tracking"
-          - "check refund status"
-          - "late shipment"
-
-  wm:
-    title: "CPU (Washing Machine)"
-    segments: [overall]
-    timeframes: [weekly, monthly, quarterly, pytd]
-    reasons:
-      overall:
-        pre_pdd:
-          - "check order status tracking"
-          - "request for early delivery"
-          - "reschedule delivery"
-        pdd:
-          - "check order status tracking"
-          - "invalid scan   delivery attempted  customer reject"
-          - "request for early delivery"
-        post_pdd:
-          - "check order status tracking"
-          - "check refund status"
-          - "late shipment"
+metrics:
+  - cpu
+  - business_metrics
+  # - csat         # uncomment when ready
+  # - refund_rate  # add new metrics here

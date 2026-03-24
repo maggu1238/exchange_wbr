@@ -1,0 +1,126 @@
+# Exchange WBR — Business Metrics Configuration
+#
+# Input files in input/business_metrics/:
+#   <type>_weekly.xlsx, <type>_monthly.xlsx, <type>_pytd.xlsx
+#   Types: dc, comp100, comp75, depth, attach, reseller, sweetner
+#
+# previous_report.csv in same folder provides OP2 carry-forward values.
+
+title: "5. Business Metrics"
+
+# Device name mapping: input file name -> output display name
+# Each file type may use different names for the same device.
+device_aliases:
+  dc: &dc_aliases
+    Mobile: WLD
+    Laptop: Laptop
+    Refrigerator: Ref
+    WashingMachine: WM
+    AC: AC
+    TV: TV
+    fan: Fan
+    mixergrinder: Mixer_Grinder
+    vacuum: Vacuum_Cleaner
+    waterheater: Water_heater
+    waterpurifier: Waterpurifier
+    gasstove: Gas Stove
+    pressurecooker: Pressure Cooker
+  attach: *dc_aliases
+  reseller: *dc_aliases
+  comp100:
+    Mobile: WLD
+    Laptop: Laptop
+    Refrigerator: Ref
+    "Washing Machine": WM
+    "Air Conditioners": AC
+    TV: TV
+    Fan: Fan
+    Mixer_Grinder: Mixer_Grinder
+    Vacuum_Cleaner: Vacuum_Cleaner
+    Water_Heater: Water_heater
+    Waterpurifier: Waterpurifier
+    "Gas stove": Gas Stove
+    "Pressure Cooker": Pressure Cooker
+  comp75:
+    Mobile: WLD
+  depth:
+    Mobile: WLD
+  sweetner:
+    Mobile: WLD
+    Laptop: Laptop
+    Refrigerators: Ref
+    Laundry: WM
+    "Air Conditioners": AC
+    TV: TV
+    Fan: Fan
+    Mixer_Grinder: Mixer_Grinder
+    Vacuum_Cleaner: Vacuum_Cleaner
+    Water_Heater: Water_heater
+    Waterpurifier: Waterpurifier
+    Gas_stoves: Gas Stove
+    Pressure_Cookers: Pressure Cooker
+
+# Row layout: groups -> sections -> devices -> metrics
+# Each metric specifies its file_type, and optionally a sub_col for multi-column files.
+groups:
+  HCTP:
+    sections:
+      - name: "Coverage of Exchange"
+        rows:
+          - { device: WLD, metric: "Demand Coverage", file_type: dc }
+          - { device: WLD, metric: "Used item selection (gap vs SIC)", file_type: hardcoded }
+          - { device: Laptop, metric: "Demand Coverage", file_type: dc }
+          - { device: Ref, metric: "Demand Coverage", file_type: dc }
+          - { device: WM, metric: "Demand Coverage", file_type: dc }
+          - { device: AC, metric: "Demand Coverage", file_type: dc }
+          - { device: TV, metric: "Demand Coverage", file_type: dc }
+
+      - name: "Exchange Value Competitiveness"
+        rows:
+          - { device: WLD, metric: "Base discount comp. vs 75% SIC discount (% of sessions)", file_type: comp75, sub_col: Base }
+          - { device: WLD, metric: "Base discount comp. vs 100% SIC discount (% of sessions)", file_type: comp100, sub_col: Base }
+          - { device: WLD, metric: "Base discount (regularized) depth as % of SIC base discount", file_type: depth }
+          - { device: WLD, metric: "Sweetner Comp", file_type: comp100, sub_col: Swtnr }
+          - { device: WLD, metric: "Overall Comp (Vs 75% SIC)", file_type: comp75, sub_col: Ovrl }
+          - { device: Laptop, metric: "Overall Comp (Vs 100% SIC)", file_type: comp100, sub_col: Ovrl }
+          - { device: Laptop, metric: "Base discount comp. vs 75% SIC discount (% of sessions)", file_type: comp75, sub_col: Base }
+          - { device: Laptop, metric: "Base discount comp. vs 100% SIC discount (% of sessions)", file_type: comp100, sub_col: Base }
+          - { device: Laptop, metric: "Sweetner Comp", file_type: comp100, sub_col: Swtnr }
+          - { device: Ref, metric: "Overall Comp", file_type: comp100, sub_col: Ovrl }
+          - { device: WM, metric: "Overall Comp", file_type: comp100, sub_col: Ovrl }
+          - { device: AC, metric: "Overall Comp", file_type: comp100, sub_col: Ovrl }
+          - { device: TV, metric: "Overall Comp", file_type: comp100, sub_col: Ovrl }
+
+      - name: "Exchange Adoption"
+        rows:
+          - { device: WLD, metric: "Attach (includes reseller customers)", file_type: attach }
+          - { device: WLD, metric: "Reseller share Attach rate", file_type: reseller }
+          - { device: WLD, metric: "Sweetner coverage", file_type: sweetner, sub_col: sponsor }
+          - { device: Laptop, metric: "Attach", file_type: attach }
+          - { device: Laptop, metric: "Reseller share", file_type: reseller }
+          - { device: Laptop, metric: "Sweetner coverage", file_type: sweetner, sub_col: sponsor }
+          - { device: Laptop, metric: "VM coverage", file_type: sweetner, sub_col: vm_session }
+          - { device: Ref, metric: "Attach", file_type: attach }
+          - { device: Ref, metric: "Sweetner coverage", file_type: sweetner, sub_col: sponsor }
+          - { device: Ref, metric: "VM coverage", file_type: sweetner, sub_col: vm_session }
+          - { device: WM, metric: "Attach", file_type: attach }
+          - { device: WM, metric: "Sweetner coverage", file_type: sweetner, sub_col: sponsor }
+          - { device: WM, metric: "VM coverage", file_type: sweetner, sub_col: vm_session }
+          - { device: AC, metric: "Attach", file_type: attach }
+          - { device: AC, metric: "Sweetner coverage", file_type: sweetner, sub_col: sponsor }
+          - { device: AC, metric: "VM coverage", file_type: sweetner, sub_col: vm_session }
+          - { device: TV, metric: "Attach", file_type: attach }
+          - { device: TV, metric: "Sweetner coverage", file_type: sweetner, sub_col: sponsor }
+          - { device: TV, metric: "VM coverage", file_type: sweetner, sub_col: vm_session }
+
+  OHL:
+    sections:
+      - name: "Exchange Value Competitiveness"
+        rows:
+          - { device: Fan, metric: "Overall Comp", file_type: comp100, sub_col: Ovrl }
+          - { device: Mixer_Grinder, metric: "Overall Comp", file_type: comp100, sub_col: Ovrl }
+          - { device: Vacuum_Cleaner, metric: "Overall Comp", file_type: comp100, sub_col: Ovrl }
+          - { device: Water_heater, metric: "Overall Comp", file_type: comp100, sub_col: Ovrl }
+          - { device: Waterpurifier, metric: "Overall Comp", file_type: comp100, sub_col: Ovrl }
+          - { device: Gas Stove, metric: "Overall Comp", file_type: comp100, sub_col: Ovrl }
+          - { device: Pressure Cooker, metric: "Overall Comp", file_type: comp100, sub_col: Ovrl }

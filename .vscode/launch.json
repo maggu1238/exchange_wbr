@@ -2,10 +2,33 @@
   "version": "0.2.0",
   "configurations": [
     {
-      "name": "Generate WBR Report",
+      "name": "Generate All Reports",
       "type": "debugpy",
       "request": "launch",
+      "python": "/Library/Frameworks/Python.framework/Versions/3.13/bin/python3",
       "program": "${workspaceFolder}/run.py",
+      "cwd": "${workspaceFolder}",
+      "console": "integratedTerminal",
+      "justMyCode": true
+    },
+    {
+      "name": "Generate Business Metrics Only",
+      "type": "debugpy",
+      "request": "launch",
+      "python": "/Library/Frameworks/Python.framework/Versions/3.13/bin/python3",
+      "program": "${workspaceFolder}/run.py",
+      "args": ["business_metrics"],
+      "cwd": "${workspaceFolder}",
+      "console": "integratedTerminal",
+      "justMyCode": true
+    },
+    {
+      "name": "Generate CPU Only",
+      "type": "debugpy",
+      "request": "launch",
+      "python": "/Library/Frameworks/Python.framework/Versions/3.13/bin/python3",
+      "program": "${workspaceFolder}/run.py",
+      "args": ["cpu"],
       "cwd": "${workspaceFolder}",
       "console": "integratedTerminal",
       "justMyCode": true
