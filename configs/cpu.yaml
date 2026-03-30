@@ -128,3 +128,22 @@ devices:
           - "check order status tracking"
           - "check refund status"
           - "late shipment"
+
+  laptop:
+    title: "CPU (Laptop)"
+    segments: [overall]
+    timeframes: [weekly, monthly, quarterly, pytd]
+    reasons:
+      overall:
+        pre_pdd:
+          - "check order status tracking"
+          - "reschedule delivery"
+          - "request for early delivery"
+        pdd:
+          - "check order status tracking"
+          - "invalid scan   delivery attempted  customer reject"
+          - "request for early delivery"
+        post_pdd:
+          - "check order status tracking"
+          - "invalid scan   delivery attempted  customer reject"
+          - "late shipment"
