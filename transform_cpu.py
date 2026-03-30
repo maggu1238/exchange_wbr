@@ -307,10 +307,10 @@ def _agg_values(df, col, labels):
 
 
 def _reason_values(df, reason, col, labels):
-    rdf = df[df["reason"] == reason].set_index("_label")[col]
+    rdf = df[df["reason"] == reason].groupby("_label")[col].sum(min_count=1)
     out = []
     for l in labels:
-        v = rdf.get(l, None)
+        v = rdf.get(l, pd.NA)
         out.append(v if pd.notna(v) else "")
     return out
 

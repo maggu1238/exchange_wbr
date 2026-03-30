@@ -60,17 +60,17 @@ devices:
     reasons:
       overall:
         pre_pdd:
-          - "check order status tracking"
-          - "request for early delivery"
-          - "reschedule delivery"
+          - "customer unaware of already scheduled service slot"
+          - "brand provider has not contacted for service"
+          - "installation slot confirmed but no one came for installation"
         pdd:
-          - "check order status tracking"
-          - "invalid scan   delivery attempted  customer reject"
-          - "request for early delivery"
-        post_pdd:
-          - "check order status tracking"
+          - "exchange cancellation refund issue"
           - "check refund status"
-          - "late shipment"
+          - "undeliverable"
+        post_pdd:
+          - "exchange cancellation refund issue"
+          - "convert exchange to regular order"
+          - "undeliverable"
 
   ac:
     title: "CPU (AC)"
@@ -80,16 +80,16 @@ devices:
       overall:
         pre_pdd:
           - "check order status tracking"
-          - "request for early delivery"
-          - "reschedule delivery"
+          - "customer unaware of already scheduled service slot"
+          - "brand provider has not contacted for service"
         pdd:
           - "check order status tracking"
           - "invalid scan   delivery attempted  customer reject"
-          - "request for early delivery"
+          - "undeliverable"
         post_pdd:
-          - "check order status tracking"
-          - "check refund status"
-          - "late shipment"
+          - "undeliverable"
+          - "invalid scan   delivery attempted  customer reject"
+          - "payment declined"
 
   refrigerator:
     title: "CPU (Refrigerator)"
@@ -99,16 +99,16 @@ devices:
       overall:
         pre_pdd:
           - "check order status tracking"
-          - "request for early delivery"
-          - "reschedule delivery"
+          - "customer unaware of already scheduled service slot"
+          - "brand provider has not contacted for service"
         pdd:
           - "check order status tracking"
           - "invalid scan   delivery attempted  customer reject"
-          - "request for early delivery"
+          - "undeliverable"
         post_pdd:
-          - "check order status tracking"
           - "check refund status"
-          - "late shipment"
+          - "check order status tracking" 
+          - "blanks"
 
   wm:
     title: "CPU (Washing Machine)"
@@ -118,17 +118,16 @@ devices:
       overall:
         pre_pdd:
           - "check order status tracking"
-          - "request for early delivery"
-          - "reschedule delivery"
+          - "customer unaware of already scheduled service slot"
+          - "brand provider has not contacted for service"
         pdd:
           - "check order status tracking"
           - "invalid scan   delivery attempted  customer reject"
-          - "request for early delivery"
+          - "undeliverble"
         post_pdd:
-          - "check order status tracking"
           - "check refund status"
-          - "late shipment"
-
+          - "check order status tracking"
+          - "blanks"
   laptop:
     title: "CPU (Laptop)"
     segments: [overall]
